@@ -1,0 +1,12 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+._*
+.Spotlight-V100
+Icon?
+
+# Editor noise
+*.swp
+*~
+.idea/
+.vscode/
