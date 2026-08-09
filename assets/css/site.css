@@ -12,6 +12,10 @@
      ink-muted  #4A5A72   6.6:1   AA
      gold       #7C5F1C   5.6:1   AA
    gold-soft and rule are decorative only and never carry text.
+   underline carries link underlines, which are non-text UI components and so
+   need 3:1 (WCAG 1.4.11). gold-soft reached only 2.2:1, so underlines take
+   their own token: same hue and saturation, lightness lowered until it clears
+   3:1 on cream (3.2:1) and on cream-alt (3.0:1), the two surfaces links sit on.
    -------------------------------------------------------------------------- */
 :root {
   --cream: #fbf8f2;
@@ -20,6 +24,7 @@
   --ink-muted: #4a5a72;
   --gold: #7c5f1c;
   --gold-soft: #c4a55a;
+  --underline: #a78638;
   --rule: #e3daca;
 
   --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
@@ -150,7 +155,7 @@ p {
 
 a {
   color: inherit;
-  text-decoration-color: var(--gold-soft);
+  text-decoration-color: var(--underline);
   text-decoration-thickness: 0.07em;
   text-underline-offset: 0.18em;
 }
@@ -622,7 +627,7 @@ a:hover {
 
 .pub__links a {
   font-weight: 600;
-  text-decoration-color: var(--gold-soft);
+  text-decoration-color: var(--underline);
 }
 
 /* --------------------------------------------------------------------------
