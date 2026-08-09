@@ -23,8 +23,9 @@ about/                About
 cv/                   CV
 assets/css/site.css   The whole stylesheet
 assets/images/        Portrait derivatives
-assets/documents/     CV PDF
+assets/documents/     CV PDF, and papers/ talks/ theses/
 .nojekyll             Serve files as-is; do not run Jekyll
+LAUNCH.md             Deployment notes
 ```
 
 ## Conventions
