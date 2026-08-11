@@ -372,16 +372,13 @@ a:hover {
   margin-top: var(--space-sm);
 }
 
-/* Portrait: deliberately small and second in the visual order. On narrow
-   screens it drops below the text rather than sitting above it. */
+/* Portrait: an ordinary photograph, deliberately small and second in the visual
+   order. On narrow screens it drops below the text rather than sitting above it.
+   No panel, no border, no shadow — the photograph carries its own edges, and the
+   square keeps it from crowding the biography at any width. */
 .portrait {
   max-width: 13rem;
   margin: 0;
-  padding: 0.75rem 0.75rem 0.55rem;
-  overflow: hidden;
-  background: var(--cream-alt);
-  border: 1px solid var(--rule);
-  border-radius: 0.45rem;
 }
 
 /* From tablet up the grid column sets the size. */
@@ -392,10 +389,11 @@ a:hover {
 }
 
 .portrait img {
+  display: block;
   width: 100%;
-  background: transparent;
-  transform: scale(1.05);
-  transform-origin: center bottom;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.45rem;
 }
 
 /* Entry points to the main sections. Hairline rules, not cards. */

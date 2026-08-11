@@ -51,13 +51,18 @@ LAUNCH.md             Deployment notes
 
 ## Portrait
 
-`assets/images/portrait-acacio-de-barros-*.{webp,png}` are derived from
-`asset-source/portrait/` in the parent preservation repository, which holds the
-untouched original. The current public repository contains only the transparent
-cut-out derivatives. The site now places that derivative inside a restrained
-photographic panel rather than letting the cut-out dissolve directly into the page.
-A future replacement should be made from the untouched source photograph, not by
-further altering the derivative.
+`assets/images/portrait-acacio-de-barros-photo-*.{webp,jpg}` and
+`assets/images/social-card-acacio-de-barros-1200x630.jpg` are built from
+`asset-source/portrait/Photo on 3-26-25 at 17.54.jpg` in the parent preservation
+repository, which holds the untouched original. The build is
+`asset-source/portrait/derived/build_portrait_assets.py`: a single 960×960 crop
+at x=320 of the 1440×960 source, then resizes and encodes. Nothing else is done
+to the photograph — no cut-out, no synthesized background, no retouching.
+
+The earlier transparent cut-out derivatives have been removed. The portrait is
+now an ordinary rectangular photograph with its own background, so it needs no
+panel, border, or shadow to sit on the cream. Rebuild rather than edit the
+derivatives if the framing needs to change.
 
 
 ## Curriculum vitae
