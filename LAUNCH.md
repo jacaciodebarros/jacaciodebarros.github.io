@@ -47,8 +47,8 @@ become selectable).
    did not load).
 3. Click through all seven pages: Research, Publications, Books, Teaching, About,
    CV, and back Home.
-4. Open one PDF, e.g.
-   https://jacaciodebarros.github.io/assets/documents/JAcaciodeBarros-CV.pdf
+4. Open the canonical HTML CV at https://jacaciodebarros.github.io/cv/ and then
+   test its printable PDF link.
 5. Visit a made-up address, e.g. https://jacaciodebarros.github.io/nope/, and
    confirm the site's own "That page is not here" page appears rather than
    GitHub's generic 404.

@@ -359,7 +359,7 @@ a:hover {
   margin-top: var(--space-md);
   padding-top: var(--space-md);
   border-top: 2px solid var(--gold-soft);
-  max-width: 18ch;
+  max-width: 30ch;
 }
 
 .intro__lede {
@@ -377,6 +377,11 @@ a:hover {
 .portrait {
   max-width: 13rem;
   margin: 0;
+  padding: 0.75rem 0.75rem 0.55rem;
+  overflow: hidden;
+  background: var(--cream-alt);
+  border: 1px solid var(--rule);
+  border-radius: 0.45rem;
 }
 
 /* From tablet up the grid column sets the size. */
@@ -388,9 +393,9 @@ a:hover {
 
 .portrait img {
   width: 100%;
-  /* The derivative is a cut-out that dissolves into transparency at the
-     bottom, so it needs no frame, border, or shadow to sit on the cream. */
   background: transparent;
+  transform: scale(1.05);
+  transform-origin: center bottom;
 }
 
 /* Entry points to the main sections. Hairline rules, not cards. */
@@ -894,6 +899,115 @@ a:hover {
   white-space: nowrap;
 }
 
+
+
+/* --------------------------------------------------------------------------
+   8f. Curriculum vitae
+   The HTML CV is the canonical record. These rules keep a long academic CV
+   readable on screen while allowing the same page to print cleanly.
+   -------------------------------------------------------------------------- */
+.cv-header {
+  max-width: var(--measure-wide);
+}
+
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-sm);
+  margin-top: var(--space-sm);
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+}
+
+.cv-version {
+  max-width: var(--measure);
+  margin-top: var(--space-sm);
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+}
+
+.cv-section-nav {
+  max-width: var(--wrap);
+}
+
+.cv-timeline,
+.cv-simple-list {
+  max-width: var(--measure-wide);
+  margin-top: var(--space-md);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.cv-timeline > li,
+.cv-simple-list > li {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--rule);
+}
+
+.cv-timeline > li {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+@media (min-width: 46rem) {
+  .cv-timeline > li {
+    grid-template-columns: 8.75rem minmax(0, 1fr);
+    column-gap: var(--space-sm);
+  }
+}
+
+.cv-date {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+.cv-item-title {
+  font-weight: 600;
+}
+
+.cv-item-org,
+.cv-item-note {
+  color: var(--ink-muted);
+}
+
+.cv-item-note {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+}
+
+.cv-simple-list {
+  counter-reset: cv-entry;
+}
+
+.cv-simple-list > li {
+  counter-increment: cv-entry;
+  position: relative;
+  padding-left: 2.25rem;
+}
+
+.cv-simple-list > li::before {
+  content: counter(cv-entry) ".";
+  position: absolute;
+  left: 0;
+  top: var(--space-sm);
+  width: 1.75rem;
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.cv-bullet-list {
+  max-width: var(--measure-wide);
+  margin-top: var(--space-sm);
+  padding-left: 1.25rem;
+}
+
+.cv-bullet-list li + li {
+  margin-top: var(--space-2xs);
+}
+
 /* --------------------------------------------------------------------------
    9. Motion and print
    -------------------------------------------------------------------------- */
@@ -908,24 +1022,317 @@ a:hover {
   }
 }
 
+@page {
+  size: letter;
+  margin: 0.58in 0.62in 0.62in;
+}
+
 @media print {
-  body {
-    background: #fff;
-    color: #000;
+  :root {
+    --text-base: 9.5pt;
+    --text-sm: 8.4pt;
+    --text-lg: 10.5pt;
+    --text-h3: 11pt;
+    --text-h2: 13.5pt;
+    --text-h1: 18pt;
+    --space-2xs: 0.12in;
+    --space-xs: 0.16in;
+    --space-sm: 0.21in;
+    --space-md: 0.3in;
+    --space-lg: 0.4in;
+    --space-xl: 0.48in;
   }
 
+  body {
+    display: block;
+    background: #fff;
+    color: #000;
+    line-height: 1.4;
+  }
+
+  .site-header,
+  .site-footer,
   .site-nav,
-  .skip-link {
-    display: none;
+  .skip-link,
+  .section-nav,
+  .cv-version {
+    display: none !important;
+  }
+
+  .site-main {
+    padding: 0;
+  }
+
+  .wrap {
+    max-width: none;
+    padding: 0;
+  }
+
+  .page-header {
+    margin-bottom: 0.3in;
+  }
+
+  .cv-contact {
+    margin-top: 0.08in;
+  }
+
+  .pub-section + .pub-section {
+    margin-top: 0.36in;
+  }
+
+  .pub-section h2 {
+    padding-bottom: 0.08in;
+  }
+
+  .pubs,
+  .cv-timeline,
+  .cv-simple-list,
+  .pub-section h2,
+  .pub-section > h3 {
+    max-width: none;
+  }
+
+  .pubs,
+  .cv-timeline,
+  .cv-simple-list {
+    gap: 0.12in;
+    margin-top: 0.16in;
+  }
+
+  .pubs > li,
+  .cv-timeline > li,
+  .cv-simple-list > li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding-top: 0.1in;
+  }
+
+  .pubs > li {
+    grid-template-columns: 0.72in minmax(0, 1fr);
+    column-gap: 0.12in;
+  }
+
+  .cv-timeline > li {
+    grid-template-columns: 1.08in minmax(0, 1fr);
+    column-gap: 0.12in;
   }
 
   a {
-    text-decoration: underline;
+    color: #000;
+    text-decoration: none;
+  }
+
+  .pub__links {
+    font-size: 8pt;
   }
 
   .prose a[href^="http"]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.85em;
-    word-break: break-all;
+    content: none;
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   10. Lean CV revision (August 2026)
+   Screen remains consistent with the site; print returns to a compact,
+   traditional academic-CV presentation closer to the pre-HTML document.
+   -------------------------------------------------------------------------- */
+.cv-position-title {
+  line-height: 1.35;
+}
+
+.cv-position-org {
+  margin-top: 0.05rem;
+  color: var(--ink-muted);
+}
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.48in 0.58in 0.52in;
+  }
+
+  .cv-page {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9.2pt;
+    line-height: 1.22;
+  }
+
+  .cv-page .page-header {
+    text-align: center;
+    margin-bottom: 0.18in;
+  }
+
+  .cv-page .page-header__eyebrow {
+    display: none;
+  }
+
+  .cv-page .page-header__lede {
+    display: block;
+    margin: 0.03in 0 0;
+    font-size: 8.6pt;
+    color: #000;
+  }
+
+  .cv-page .page-header h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19pt;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .cv-page .cv-contact {
+    justify-content: center;
+    gap: 0.03in 0.18in;
+    margin-top: 0.05in;
+    padding-bottom: 0.07in;
+    border-bottom: 1px solid #000;
+    font-size: 8.3pt;
+    color: #000;
+  }
+
+  .cv-page .pub-section + .pub-section {
+    margin-top: 0.19in;
+  }
+
+  .cv-page .pub-section h2 {
+    margin: 0 0 0.08in;
+    padding: 0;
+    border: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12.2pt;
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .cv-page .pub-section > h3 {
+    margin-top: 0.12in;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10.2pt;
+  }
+
+  .cv-page .pubs,
+  .cv-page .cv-timeline,
+  .cv-page .cv-simple-list,
+  .cv-page .cv-bullet-list {
+    margin-top: 0.06in;
+    gap: 0.035in;
+  }
+
+  .cv-page .pubs > li,
+  .cv-page .cv-timeline > li,
+  .cv-page .cv-simple-list > li {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .cv-page .pubs > li,
+  .cv-page .cv-timeline > li {
+    grid-template-columns: 0.82in minmax(0, 1fr);
+    column-gap: 0.10in;
+  }
+
+  .cv-page #positions .cv-timeline > li,
+  .cv-page #education .cv-timeline > li,
+  .cv-page #honors .cv-timeline > li {
+    grid-template-columns: minmax(0, 1fr) 0.85in;
+    column-gap: 0.10in;
+  }
+
+  .cv-page #positions .pub__year,
+  .cv-page #education .pub__year,
+  .cv-page #honors .pub__year {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    font-size: 9.2pt;
+    color: #000;
+    white-space: nowrap;
+  }
+
+  .cv-page #positions .pub__body,
+  .cv-page #education .pub__body,
+  .cv-page #honors .pub__body {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .cv-page .cv-position-title,
+  .cv-page .cv-position-org {
+    margin: 0;
+    line-height: 1.18;
+  }
+
+  .cv-page .cv-position-org {
+    margin-left: 0.12in;
+    color: #000;
+  }
+
+  .cv-page .pub__year,
+  .cv-page .pub__note,
+  .cv-page .pub__links,
+  .cv-page .cv-item-note {
+    font-size: 8.3pt;
+  }
+
+  .cv-page .pub__cite,
+  .cv-page .pub__note,
+  .cv-page .pub__links {
+    line-height: 1.22;
+  }
+
+  .cv-page .pub__note {
+    margin-top: 0.02in;
+    color: #000;
+  }
+
+  .cv-page .pub__links {
+    margin-top: 0.02in;
+  }
+
+  .cv-page .cv-simple-list {
+    counter-reset: cv-entry;
+  }
+
+  .cv-page .cv-simple-list > li {
+    padding-left: 0.22in;
+    line-height: 1.22;
+  }
+
+  .cv-page .cv-simple-list > li::before {
+    top: 0;
+    width: 0.18in;
+    font-size: 8.3pt;
+    color: #000;
+  }
+
+  .cv-page .cv-bullet-list li + li {
+    margin-top: 0.02in;
+  }
+
+  .cv-page a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+@media print {
+  @page { margin: 0.40in 0.54in 0.42in; }
+  .cv-page { font-size: 8.9pt; line-height: 1.16; color: #000; }
+  .cv-page .page-header h1,
+  .cv-page .pub-section h2,
+  .cv-page .pub-section > h3,
+  .cv-page .pub__year { color: #000; }
+  .cv-page .pub-section + .pub-section { margin-top: 0.15in; }
+  .cv-page .pubs,
+  .cv-page .cv-timeline,
+  .cv-page .cv-simple-list,
+  .cv-page .cv-bullet-list { gap: 0.022in; }
+  .cv-page .pub__cite,
+  .cv-page .pub__note,
+  .cv-page .cv-simple-list > li { line-height: 1.16; }
+  .cv-page .pub__links { display: none !important; }
 }

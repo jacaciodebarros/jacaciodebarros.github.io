@@ -20,10 +20,10 @@ publications/         Publications
 books/                Books
 teaching/             Teaching
 about/                About
-cv/                   CV
+cv/                   Canonical HTML CV
 assets/css/site.css   The whole stylesheet
 assets/images/        Portrait derivatives
-assets/documents/     CV PDF, and papers/ talks/ theses/
+assets/documents/     Printable CV PDF, and papers/ talks/ theses/
 .nojekyll             Serve files as-is; do not run Jekyll
 LAUNCH.md             Deployment notes
 ```
@@ -53,7 +53,24 @@ LAUNCH.md             Deployment notes
 
 `assets/images/portrait-acacio-de-barros-*.{webp,png}` are derived from
 `asset-source/portrait/` in the parent preservation repository, which holds the
-untouched original. The background was removed with the macOS Vision framework
-and the lower edge dissolved to transparency so the cut-out sits on the cream
-background without a frame. The scripts that produced it are archived alongside
-the original.
+untouched original. The current public repository contains only the transparent
+cut-out derivatives. The site now places that derivative inside a restrained
+photographic panel rather than letting the cut-out dissolve directly into the page.
+A future replacement should be made from the untouched source photograph, not by
+further altering the derivative.
+
+
+## Curriculum vitae
+
+`cv/index.html` is the canonical CV. `assets/documents/JAcaciodeBarros-CV.pdf` is
+a printable derivative generated from the same HTML and print CSS. Substantive CV
+changes should be made in the HTML/source data first so the two versions do not
+drift apart.
+
+Regenerate the PDF from the repository root with:
+
+```
+./scripts/generate_cv_pdf.sh
+```
+
+The script serves the site locally and renders `/cv/` with WeasyPrint, so root-relative assets and the repository's `@media print` rules are used. WeasyPrint must be installed on the machine that regenerates the PDF.
